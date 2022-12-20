@@ -5,14 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TaskManager"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <ListView ItemsSource="{Binding Processes}">
+        Title="MainWindow" Height="600" Width="800">
+    <StackPanel>
+        <ListView ItemsSource="{Binding Processes}"
+                  Height="300"
+                  SelectedItem="{Binding SelectedProcess}">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock FontSize="20" Text="{Binding ProcessName}"></TextBlock>
+                    <TextBlock FontSize="16" Text="{Binding ProcessName}"></TextBlock>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-    </Grid>
+
+        <StackPanel Orientation="Horizontal">
+            <TextBlock FontSize="16" >Process Name:  </TextBlock>
+            <TextBlock FontSize="16" Text="{Binding SelectedProcess.ProcessName}"></TextBlock>
+        </StackPanel>
+
+    </StackPanel>
 </Window>

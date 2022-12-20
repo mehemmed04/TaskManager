@@ -10,6 +10,14 @@ namespace TaskManager.ViewModels
     public class MainViewModel
     {
         public List<Process> Processes { get; set; }
+        private Process selectedProcess;
+
+        public Process SelectedProcess
+        {
+            get { return selectedProcess; }
+            set { selectedProcess = value; }
+        }
+
         public MainViewModel()
         {
             Processes = Process.GetProcesses().ToList();
