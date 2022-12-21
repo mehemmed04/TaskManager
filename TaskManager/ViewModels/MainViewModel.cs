@@ -66,6 +66,7 @@ namespace TaskManager.ViewModels
         }
 
         public RelayCommand CreateCommand { get; set; }
+        public RelayCommand KillCommand { get; set; }
         public MainViewModel()
         {
 
@@ -102,6 +103,17 @@ namespace TaskManager.ViewModels
                 }
             });
 
+            KillCommand = new RelayCommand((o) =>
+            {
+                foreach (var item in Processes)
+                {
+                    if(item.ProcessName == Filename)
+                    {
+                        item.Kill();
+                    }
+                }
+            });
+
             ChangePriorityCommand = new RelayCommand((o) =>
             {
                 if (selectedProcess != null)
@@ -124,10 +136,8 @@ namespace TaskManager.ViewModels
 
             CreateCommand = new RelayCommand((o) =>
             {
-                var p = Process.Start(Filename+".exe");
-               int i=  Processes.IndexOf(p);
-                SelectedIndex = i;
-                index = SelectedIndex;
+                Process.Start(Filename + ".exe");
+               
             });
 
 
