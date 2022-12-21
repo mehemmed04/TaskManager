@@ -57,8 +57,19 @@ namespace TaskManager.ViewModels
         public RelayCommand KillProcessCommand { get; set; }
         public RelayCommand ChangedCommand { get; set; }
         public RelayCommand ChangePriorityCommand { get; set; }
+        private string filename;
+
+        public string Filename
+        {
+            get { return filename; }
+            set { filename = value; }
+        }
+
+        public RelayCommand CreateCommand { get; set; }
         public MainViewModel()
         {
+
+
             var timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
             timer.Tick += UpdateProcess;
             timer.Start();
@@ -109,6 +120,16 @@ namespace TaskManager.ViewModels
                     MessageBox.Show("Select Process");
                 }
             });
+
+
+            CreateCommand = new RelayCommand((o) =>
+            {
+                var p = Process.Start(Filename+".exe");
+               int i=  Processes.IndexOf(p);
+                SelectedIndex = i;
+                index = SelectedIndex;
+            });
+
         }
 
         private void UpdateProcess(object sender, EventArgs e)

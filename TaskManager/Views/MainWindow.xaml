@@ -102,6 +102,9 @@
             <Button
                 Command="{Binding KillProcessCommand}">Kill Process</Button>
         </StackPanel>
-        
+        <StackPanel Orientation="Horizontal">
+            <TextBox Text="{Binding Filename,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontSize="16" Width="200"></TextBox>
+            <Button Command="{Binding CreateCommand}">Create</Button>
+        </StackPanel>
         </StackPanel>
 </Window>
