@@ -130,6 +130,7 @@ namespace TaskManager.ViewModels
                 index = SelectedIndex;
             });
 
+
         }
 
         private void UpdateProcess(object sender, EventArgs e)
