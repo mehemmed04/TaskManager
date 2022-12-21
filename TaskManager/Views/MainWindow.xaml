@@ -27,8 +27,8 @@
                                 <ColumnDefinition Width="80"/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <Label Grid.Column="1" FontSize="16" FontWeight="DemiBold">Process id</Label>
-                            <Label Grid.Column="2" FontSize="16" FontWeight="DemiBold">Process name</Label>
+                            <Label Grid.Column="1" FontSize="14" FontWeight="DemiBold">Process id</Label>
+                            <Label Grid.Column="2" FontSize="14" FontWeight="DemiBold">Process name</Label>
                         </Grid>
                         <ScrollViewer>
                             <ItemsPresenter />
@@ -44,8 +44,8 @@
                             <ColumnDefinition Width="80"/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock FontSize="16" Text="{Binding Id}" Grid.Column="1"/>
-                        <TextBlock FontSize="16" Text="{Binding ProcessName}" Grid.Column="2"/>
+                        <TextBlock FontSize="15" Text="{Binding Id}" Grid.Column="1"/>
+                        <TextBlock FontSize="15" Text="{Binding ProcessName}" Grid.Column="2"/>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
