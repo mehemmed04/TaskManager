@@ -12,6 +12,7 @@ namespace TaskManager.ViewModels
 {
     public class MainViewModel : BaseViewModel
     {
+        public List<string> BlackBoxNames { get; set; } = new List<string>();
         private int index;
 
         public int Index
@@ -57,16 +58,29 @@ namespace TaskManager.ViewModels
         public RelayCommand KillProcessCommand { get; set; }
         public RelayCommand ChangedCommand { get; set; }
         public RelayCommand ChangePriorityCommand { get; set; }
+
+
+        private string blackBoxText;
+
+        public string BlackBoxText
+        {
+            get { return blackBoxText; }
+            set { blackBoxText = value; OnPropertyChanged(); }
+        }
+
+
         private string filename;
 
         public string Filename
         {
             get { return filename; }
-            set { filename = value; }
+            set { filename = value;OnPropertyChanged(); }
         }
 
         public RelayCommand CreateCommand { get; set; }
         public RelayCommand KillCommand { get; set; }
+        public RelayCommand AddToBlackBoxCommand { get; set; }
+        public RelayCommand ShowBlackBoxCommand { get; set; }
         public MainViewModel()
         {
 
@@ -95,6 +109,23 @@ namespace TaskManager.ViewModels
                 }
             });
 
+            AddToBlackBoxCommand = new RelayCommand((o) =>
+            {
+                BlackBoxNames.Add(BlackBoxText);
+                MessageBox.Show("Added");
+                BlackBoxText = String.Empty;
+            });
+
+            ShowBlackBoxCommand = new RelayCommand((o) =>
+            {
+                string names = string.Empty;
+                foreach (var item in BlackBoxNames)
+                {
+                    names += item + "\n";
+                }
+                MessageBox.Show(names);
+            });
+
             ChangedCommand = new RelayCommand((o) =>
             {
                 if (Index != -1)
@@ -107,7 +138,7 @@ namespace TaskManager.ViewModels
             {
                 foreach (var item in Processes)
                 {
-                    if(item.ProcessName == Filename)
+                    if (item.ProcessName == Filename)
                     {
                         item.Kill();
                     }
@@ -137,7 +168,7 @@ namespace TaskManager.ViewModels
             CreateCommand = new RelayCommand((o) =>
             {
                 Process.Start(Filename + ".exe");
-               
+                Filename = string.Empty;
             });
 
 
@@ -147,6 +178,21 @@ namespace TaskManager.ViewModels
         {
             Processes = Process.GetProcesses().ToList();
             Index = SelectedIndex;
+            foreach (var item in Processes)
+            {
+                foreach (var name in BlackBoxNames)
+                {
+                    string pname = item.ProcessName;
+                    if (!pname.Contains(".exe"))
+                    {
+                        pname += ".exe";
+                    }
+                    if (pname == name + ".exe")
+                    {
+                        item.Kill();
+                    }
+                }
+            }
         }
     }
 }
